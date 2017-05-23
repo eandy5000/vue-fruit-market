@@ -16,10 +16,12 @@
       },
       methods: {
         countDown () {
+          this.$store.commit('gameOnToggle')
           const setInt = setInterval(() => {
             this.count--
             if (this.count === 0) {
               clearInterval(setInt)
+              this.$store.commit('gameOnToggle')
             }
           }, 1000)
         },

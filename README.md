@@ -1,6 +1,6 @@
 # fruit-market-vue
 
-> A Vue.js project
+> Using Vue to build fruit market commodity trading game
 
 ## Build Setup
 

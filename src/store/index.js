@@ -5,6 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    test: 'I work'
+    gameOn: false
+  },
+  mutations: {
+    gameOnToggle (state) {
+      state.gameOn = !state.gameOn
+    }
   }
 })
