@@ -1,9 +1,25 @@
 <template>
-    <div>
-        <img :src="pear" />
-        <img :src="apple" />
-        <img :src="bananas" />
-        <img :src="orange" />
+    <div class="container">
+    
+    <fruit-container
+      name="Apple"
+      :image="apple"
+    ></fruit-container>
+    
+    <fruit-container
+      name="Pear"
+      :image="pear"
+    ></fruit-container>
+    
+    <fruit-container
+      name="Orange"
+      :image="orange"
+    ></fruit-container>
+    
+    <fruit-container
+      name="Bananas"
+      :image="bananas"
+    ></fruit-container>
     </div>
 </template>
 
@@ -12,6 +28,7 @@
     import apple from '../../assets/apple.png'
     import bananas from '../../assets/bananas.png'
     import orange from '../../assets/orange.png'
+    import FruitContainer from './FruitContainer.vue'
     export default {
       data () {
         return {
@@ -20,10 +37,21 @@
           bananas,
           orange
         }
+      },
+      components: {
+        FruitContainer
       }
     }
 </script>
 
-<style>
-    
+<style scoped>
+    .container {
+      display: flex;
+      justify-content: space-around;
+    }
+    .fruit {
+      border: 1px solid black;
+      border-radius: 1em;
+      padding: 3em;
+    }
 </style> 
