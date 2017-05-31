@@ -54,7 +54,38 @@ export default new Vuex.Store({
       state.game = payload
     },
     changeApplePrice (state) {
-      state.game.applePrice += 0.50
+      let sign = (Math.random() <= 0.5) ? -1 : 1
+      let rand = Math.random() * sign
+
+      rand = ((state.game.applePrice + rand) <= 0) ? (rand * -1) : rand
+
+      state.game.applePrice += rand
+    },
+    changePearPrice (state) {
+      let sign = ((Math.random()) <= 0.5) ? -1 : 1
+      let rand = Math.random() * sign
+      if ((state.game.pearPrice + rand) < 0) {
+        rand *= -1
+      }
+      state.game.pearPrice += rand
+    },
+    changeOrangePrice (state) {
+      let sign = ((Math.random()) <= 0.5) ? -1 : 1
+      let rand = (Math.random() * sign)
+
+      if ((state.game.orangePrice += rand) < 0) {
+        rand *= -1
+      }
+      state.game.orangePrice += rand
+    },
+    changeBananaPrice (state) {
+      let sign = (Math.random() >= 0.5) ? -1 : 1
+      let rand = Math.random() * sign
+
+      if ((state.game.bananaPrice + rand) < 0) {
+        rand = rand * (sign * -1)
+      }
+      state.game.bananaPrice += rand
     }
   },
   actions: {

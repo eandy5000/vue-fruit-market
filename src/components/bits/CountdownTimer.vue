@@ -50,10 +50,12 @@
               this.$store.commit('gameOnToggle')
               this.$store.commit('endGame', this.game)
               this.$store.commit('gameReset', this.gameTemplate())
-              console.log('games ', this.games)
             }
-            if (this.count % 3 === 0) {
+            if (this.count !== 0) {
               this.$store.commit('changeApplePrice')
+              this.$store.commit('changePearPrice')
+              this.$store.commit('changeOrangePrice')
+              this.$store.commit('changeBananaPrice')
             }
           }, 1000)
         },
@@ -62,9 +64,7 @@
           this.countDown()
         }
       },
-      created () {
-        console.log(this.games)
-      }
+      created () {}
     }
 </script>
 
