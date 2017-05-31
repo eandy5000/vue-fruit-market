@@ -6,38 +6,54 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     gameOn: false,
-    apples: 0,
-    pears: 0,
-    oranges: 0,
-    bananas: 0
+    game: {
+      apples: 0,
+      pears: 0,
+      oranges: 0,
+      bananas: 0,
+      pearPrice: 5,
+      applePrice: 5,
+      orangePrice: 5,
+      bananaPrice: 5
+    },
+    games: []
   },
   mutations: {
     gameOnToggle (state) {
       state.gameOn = !state.gameOn
     },
     changeApples (state, payload) {
-      state.apples += payload
+      state.game.apples += payload
     },
     zeroApples (state) {
-      state.apples = 0
+      state.game.apples = 0
     },
     changePears (state, payload) {
-      state.pears += payload
+      state.game.pears += payload
     },
     zeroPears (state) {
-      state.pears = 0
+      state.game.pears = 0
     },
     changeOranges (state, payload) {
-      state.oranges += payload
+      state.game.oranges += payload
     },
     zeroOranges (state) {
-      state.oranges = 0
+      state.game.oranges = 0
     },
     changeBananas (state, payload) {
-      state.bananas += payload
+      state.game.bananas += payload
     },
     zeroBananas (state) {
-      state.bananas = 0
+      state.game.bananas = 0
+    },
+    endGame (state, payload) {
+      state.games.push(payload)
+    },
+    gameReset (state, payload) {
+      state.game = payload
     }
+  },
+  actions: {
+    test (context) {}
   }
 })

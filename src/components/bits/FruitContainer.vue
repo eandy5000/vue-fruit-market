@@ -2,16 +2,27 @@
     <div>
         <h3>{{name}}</h3>
         <img :src="image" />
-        <h5>{{counter}}</h5>
-        <button @click="addFruit()">Buy</button>
-        <button @click="subFruit()">Sell</button>
+        <h5>Inventory: {{counter}}</h5>
+        <h5>Price: {{fruitPrice | dollar}}</h5>
+        <button v-if="gameOn" @click="addFruit()">Buy</button>
+        <button v-if="gameOn" @click="subFruit()">Sell</button>
     </div>
 </template>
 
 <script>
     export default {
-      props: ['name', 'image', 'counter', 'addFruit', 'subFruit'],
-      methods: {}
+      props: ['name', 'image', 'counter', 'addFruit', 'subFruit', 'fruitPrice'],
+      methods: {},
+      filters: {
+        dollar (number) {
+          return `$${number.toFixed(2)}`
+        }
+      },
+      computed: {
+        gameOn () {
+          return this.$store.state.gameOn
+        }
+      }
     }
 </script>
 

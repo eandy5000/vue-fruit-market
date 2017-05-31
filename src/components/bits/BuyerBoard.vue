@@ -7,6 +7,7 @@
       :counter="appleCount"
       :addFruit="buyApples"
       :subFruit="sellApples"
+      :fruitPrice="applePrice"
     ></fruit-container>
     
     <fruit-container
@@ -15,6 +16,7 @@
       :counter="pearCount"
       :addFruit="buyPears"
       :subFruit="sellPears"
+      :fruitPrice="pearPrice"
     ></fruit-container>
     
     <fruit-container
@@ -23,6 +25,7 @@
       :counter="orangeCount"
       :addFruit="buyOranges"
       :subFruit="sellOranges"
+      :fruitPrice="orangePrice"
     ></fruit-container>
     
     <fruit-container
@@ -31,6 +34,7 @@
       :counter="bananaCount"
       :addFruit="buyBananas"
       :subFruit="sellBananas"
+      :fruitPrice="bananaPrice"
     ></fruit-container>
     </div>
 </template>
@@ -97,18 +101,31 @@
       },
       computed: {
         appleCount () {
-          return this.$store.state.apples
+          return this.$store.state.game.apples
         },
         pearCount () {
-          return this.$store.state.pears
+          return this.$store.state.game.pears
         },
         orangeCount () {
-          return this.$store.state.oranges
+          return this.$store.state.game.oranges
         },
         bananaCount () {
-          return this.$store.state.bananas
+          return this.$store.state.game.bananas
+        },
+        applePrice () {
+          return this.$store.state.game.applePrice
+        },
+        pearPrice () {
+          return this.$store.state.game.pearPrice
+        },
+        orangePrice () {
+          return this.$store.state.game.orangePrice
+        },
+        bananaPrice () {
+          return this.$store.state.game.bananaPrice
         }
-      }
+      },
+      created () {}
     }
 </script>
 
