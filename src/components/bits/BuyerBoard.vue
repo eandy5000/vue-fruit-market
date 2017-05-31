@@ -51,7 +51,11 @@
           pear,
           apple,
           bananas,
-          orange
+          orange,
+          pearName: 'Pear',
+          appleName: 'Apple',
+          bananasName: 'Banana',
+          orangeName: 'Orange'
         }
       },
       components: {
@@ -60,42 +64,82 @@
       methods: {
         buyApples () {
           this.$store.commit('changeApples', 1)
+          this.transactions.push({
+            fruit: this.appleName,
+            price: this.applePrice,
+            type: 'buy'
+          })
         },
         sellApples () {
           if ((this.$store.state.apples - 1) < 0) {
             this.$store.commit('zeroApples')
           } else {
             this.$store.commit('changeApples', -1)
+            this.transactions.push({
+              fruit: this.appleName,
+              price: this.applePrice,
+              type: 'sell'
+            })
           }
         },
         buyPears () {
           this.$store.commit('changePears', 1)
+          this.transactions.push({
+            fruit: this.pearName,
+            price: this.pearPrice,
+            type: 'buy'
+          })
         },
         sellPears () {
           if (this.pearCount - 1 < 0) {
             this.$store.commit('zeroPears')
           } else {
             this.$store.commit('changePears', -1)
+            this.transactions.push({
+              fruit: this.pearName,
+              price: this.pearPrice,
+              type: 'sell'
+            })
           }
         },
         buyOranges () {
           this.$store.commit('changeOranges', 1)
+          this.transactions.push({
+            fruit: this.orangeName,
+            price: this.orangePrice,
+            type: 'buy'
+          })
         },
         sellOranges () {
           if (this.orangeCount - 1 < 0) {
             this.$store.commit('zeroOranges')
           } else {
             this.$store.commit('changeOranges', -1)
+            this.transactions.push({
+              fruit: this.orangeName,
+              price: this.orangePrice,
+              type: 'sell'
+            })
           }
         },
         buyBananas () {
           this.$store.commit('changeBananas', 1)
+          this.transactions.push({
+            fruit: this.bananasName,
+            price: this.bananaPrice,
+            type: 'buy'
+          })
         },
         sellBananas () {
           if (this.bananaCount - 1 < 0) {
             this.$store.commit('zeroBananas')
           } else {
             this.$store.commit('changeBananas', -1)
+            this.transactions.push({
+              fruit: this.bananasName,
+              price: this.bananaPrice,
+              type: 'sell'
+            })
           }
         }
       },
@@ -123,6 +167,9 @@
         },
         bananaPrice () {
           return this.$store.state.game.bananaPrice
+        },
+        transactions () {
+          return this.$store.state.game.transactions
         }
       },
       created () {}

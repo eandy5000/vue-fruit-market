@@ -11,8 +11,8 @@
     export default {
       data () {
         return {
-          countStart: 3,
-          count: 3,
+          countStart: 10,
+          count: 10,
           gameTemplate () {
             return {
               apples: 0,
@@ -22,7 +22,8 @@
               pearPrice: 5,
               applePrice: 5,
               orangePrice: 5,
-              bananaPrice: 5
+              bananaPrice: 5,
+              transactions: []
             }
           }
         }
@@ -37,6 +38,7 @@
         game () {
           return this.$store.state.game
         }
+
       },
       methods: {
         countDown () {
@@ -46,9 +48,12 @@
             if (this.count < 1) {
               clearInterval(setInt)
               this.$store.commit('gameOnToggle')
-              this.$store.commit('gameReset', this.gameTemplate())
               this.$store.commit('endGame', this.game)
+              this.$store.commit('gameReset', this.gameTemplate())
               console.log('games ', this.games)
+            }
+            if (this.count % 3 === 0) {
+              this.$store.commit('changeApplePrice')
             }
           }, 1000)
         },

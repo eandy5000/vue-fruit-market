@@ -14,7 +14,8 @@ export default new Vuex.Store({
       pearPrice: 5,
       applePrice: 5,
       orangePrice: 5,
-      bananaPrice: 5
+      bananaPrice: 5,
+      transactions: []
     },
     games: []
   },
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     },
     gameReset (state, payload) {
       state.game = payload
+    },
+    changeApplePrice (state) {
+      state.game.applePrice += 0.50
     }
   },
   actions: {
