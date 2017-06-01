@@ -11,8 +11,8 @@
     export default {
       data () {
         return {
-          countStart: 60,
-          count: 60,
+          countStart: 10,
+          count: 10,
           gameTemplate () {
             return {
               apples: 0,
@@ -50,7 +50,6 @@
               clearInterval(setInt)
               this.$store.commit('gameOnToggle')
               this.$store.commit('endGame', this.game)
-              this.$store.commit('gameReset', this.gameTemplate())
               console.log(this.games)
             }
             if (this.count !== 0) {
@@ -63,6 +62,7 @@
         },
         restart () {
           this.count = this.countStart
+          this.$store.commit('gameReset', Object.assign({}, this.gameTemplate()))
           this.countDown()
         }
       },
