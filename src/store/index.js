@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     startingCash: 100,
     gameOn: false,
+    firstGame: true,
     game: {
       apples: 0,
       pears: 0,
@@ -17,6 +18,7 @@ export default new Vuex.Store({
       orangePrice: 5,
       bananaPrice: 5,
       transactions: [],
+      prices: [],
       cash: 100
     },
     games: []
@@ -24,6 +26,9 @@ export default new Vuex.Store({
   mutations: {
     gameOnToggle (state) {
       state.gameOn = !state.gameOn
+    },
+    firstGameToggle (state) {
+      state.firstGame = false
     },
     changeApples (state, payload) {
       state.game.apples += payload
@@ -92,6 +97,9 @@ export default new Vuex.Store({
       let out = ((cash + payload) < 0) ? cash : (cash + payload)
 
       state.game.cash = parseFloat(out.toFixed(2))
+    },
+    pushPrices (state, payload) {
+      state.game.prices.push(payload)
     }
   },
   actions: {

@@ -11,8 +11,8 @@
     export default {
       data () {
         return {
-          countStart: 10,
-          count: 10,
+          countStart: 3,
+          count: 3,
           gameTemplate () {
             return {
               apples: 0,
@@ -24,6 +24,7 @@
               orangePrice: 5,
               bananaPrice: 5,
               transactions: [],
+              prices: [],
               cash: 100
             }
           }
@@ -38,11 +39,33 @@
         },
         game () {
           return this.$store.state.game
+        },
+        applePrice () {
+          return this.$store.state.game.applePrice
+        },
+        pearPrice () {
+          return this.$store.state.game.pearPrice
+        },
+        orangePrice () {
+          return this.$store.state.game.orangePrice
+        },
+        bananaPrice () {
+          return this.$store.state.game.bananaPrice
+        },
+        prices () {
+          return this.$store.state.game.prices
+        },
+        firstGame () {
+          return this.$store.state.firstGame
         }
-
       },
       methods: {
         countDown () {
+          console.log('first game check ', this.firstGame)
+          if (this.firstGame) {
+            this.$store.commit('firstGameToggle')
+            console.log('first game ', this.firstGame)
+          }
           this.$store.commit('gameOnToggle')
           const setInt = setInterval(() => {
             this.count--
@@ -50,13 +73,19 @@
               clearInterval(setInt)
               this.$store.commit('gameOnToggle')
               this.$store.commit('endGame', this.game)
-              console.log(this.games)
+              console.log('games', this.games)
             }
             if (this.count !== 0) {
               this.$store.commit('changeApplePrice')
               this.$store.commit('changePearPrice')
               this.$store.commit('changeOrangePrice')
               this.$store.commit('changeBananaPrice')
+              this.$store.commit('pushPrices', {
+                apples: this.applePrice,
+                pears: this.pearPrice,
+                oranges: this.orangePrice,
+                bananas: this.bananaPrice
+              })
             }
           }, 1000)
         },
@@ -64,6 +93,11 @@
           this.count = this.countStart
           this.$store.commit('gameReset', Object.assign({}, this.gameTemplate()))
           this.countDown()
+        },
+        getFinalPrice () {
+          let final = this.prices.length - 1
+          console.log(this.prices[final])
+          return this.prices[final]
         }
       },
       created () {}

@@ -1,8 +1,11 @@
 <template>
     <div class="container">
         <div class="score">
-        <h1>Scoreboard</h1>
-        Cash: {{cash}}
+            <h1>Scoreboard</h1>
+            Cash: {{cash}}
+            <div v-if="displayFinalStats">
+             Final Stats
+            </div>
         </div>
         <div class="timer">
             <countdown-timer></countdown-timer>
@@ -19,6 +22,12 @@
       computed: {
         cash () {
           return this.$store.state.game.cash
+        },
+        displayFinalStats () {
+          return !this.firstGame && !this.$store.state.gameOn
+        },
+        firstGame () {
+          return this.$store.state.firstGame
         }
       }
     }
