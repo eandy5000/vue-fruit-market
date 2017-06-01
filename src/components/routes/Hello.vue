@@ -1,18 +1,18 @@
 <template>
   <div class="hello">
+    <score-board></score-board>
     <buyer-board></buyer-board>
-    <countdown-timer></countdown-timer>
   </div>
 </template>
 
 <script>
-import CountdownTimer from '../bits/CountdownTimer.vue'
 import BuyerBoard from '../bits/BuyerBoard.vue'
+import ScoreBoard from '../bits/ScoreBoard.vue'
 export default {
   name: 'hello',
   components: {
-    CountdownTimer,
-    BuyerBoard
+    BuyerBoard,
+    ScoreBoard
   }
 }
 </script>

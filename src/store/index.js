@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    startingCash: 100,
     gameOn: false,
     game: {
       apples: 0,
@@ -15,7 +16,8 @@ export default new Vuex.Store({
       applePrice: 5,
       orangePrice: 5,
       bananaPrice: 5,
-      transactions: []
+      transactions: [],
+      cash: 100
     },
     games: []
   },
@@ -84,6 +86,12 @@ export default new Vuex.Store({
 
       let out = ((currentPrice + rand) <= 0) ? (currentPrice + (rand *= -1)) : (currentPrice + rand)
       state.game.bananaPrice = out
+    },
+    changeCash (state, payload) {
+      let cash = state.game.cash
+      let out = ((cash + payload) < 0) ? cash : (cash + payload)
+
+      state.game.cash = parseFloat(out.toFixed(2))
     }
   },
   actions: {

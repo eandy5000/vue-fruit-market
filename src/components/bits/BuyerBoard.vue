@@ -63,15 +63,21 @@
       },
       methods: {
         buyApples () {
-          this.$store.commit('changeApples', 1)
-          this.transactions.push({
-            fruit: this.appleName,
-            price: this.applePrice,
-            type: 'buy'
-          })
+          if (this.cash - this.applePrice < 0) {
+            return
+          } else {
+            this.$store.commit('changeApples', 1)
+            this.transactions.push({
+              fruit: this.appleName,
+              price: this.applePrice,
+              type: 'buy'
+            })
+            this.$store.commit('changeCash', parseFloat(-this.applePrice.toFixed(2)))
+            return
+          }
         },
         sellApples () {
-          if ((this.$store.state.apples - 1) < 0) {
+          if ((this.appleCount - 1) < 0) {
             this.$store.commit('zeroApples')
           } else {
             this.$store.commit('changeApples', -1)
@@ -80,18 +86,25 @@
               price: this.applePrice,
               type: 'sell'
             })
+            this.$store.commit('changeCash', parseFloat(this.applePrice.toFixed(2)))
           }
         },
         buyPears () {
-          this.$store.commit('changePears', 1)
-          this.transactions.push({
-            fruit: this.pearName,
-            price: this.pearPrice,
-            type: 'buy'
-          })
+          if (this.cash - this.pearPrice < 0) {
+            return
+          } else {
+            this.$store.commit('changePears', 1)
+            this.transactions.push({
+              fruit: this.pearName,
+              price: this.pearPrice,
+              type: 'buy'
+            })
+            this.$store.commit('changeCash', parseFloat(-this.pearPrice.toFixed(2)))
+            return
+          }
         },
         sellPears () {
-          if (this.pearCount - 1 < 0) {
+          if ((this.pearCount - 1) < 0) {
             this.$store.commit('zeroPears')
           } else {
             this.$store.commit('changePears', -1)
@@ -100,18 +113,25 @@
               price: this.pearPrice,
               type: 'sell'
             })
+            this.$store.commit('changeCash', parseFloat(this.pearPrice.toFixed(2)))
           }
         },
         buyOranges () {
-          this.$store.commit('changeOranges', 1)
-          this.transactions.push({
-            fruit: this.orangeName,
-            price: this.orangePrice,
-            type: 'buy'
-          })
+          if (this.cash - this.orangePrice < 0) {
+            return
+          } else {
+            this.$store.commit('changeOranges', 1)
+            this.transactions.push({
+              fruit: this.orangeName,
+              price: this.orangePrice,
+              type: 'buy'
+            })
+            this.$store.commit('changeCash', parseFloat(-this.orangePrice.toFixed(2)))
+            return
+          }
         },
         sellOranges () {
-          if (this.orangeCount - 1 < 0) {
+          if ((this.orangeCount - 1) < 0) {
             this.$store.commit('zeroOranges')
           } else {
             this.$store.commit('changeOranges', -1)
@@ -120,26 +140,34 @@
               price: this.orangePrice,
               type: 'sell'
             })
+            this.$store.commit('changeCash', parseFloat(this.orangePrice.toFixed(2)))
           }
         },
         buyBananas () {
-          this.$store.commit('changeBananas', 1)
-          this.transactions.push({
-            fruit: this.bananasName,
-            price: this.bananaPrice,
-            type: 'buy'
-          })
+          if (this.cash - this.bananaPrice < 0) {
+            return
+          } else {
+            this.$store.commit('changeBananas', 1)
+            this.transactions.push({
+              fruit: this.bananaName,
+              price: this.bananaPrice,
+              type: 'buy'
+            })
+            this.$store.commit('changeCash', parseFloat(-this.bananaPrice.toFixed(2)))
+            return
+          }
         },
         sellBananas () {
-          if (this.bananaCount - 1 < 0) {
+          if ((this.bananaCount - 1) < 0) {
             this.$store.commit('zeroBananas')
           } else {
             this.$store.commit('changeBananas', -1)
             this.transactions.push({
-              fruit: this.bananasName,
+              fruit: this.bananaName,
               price: this.bananaPrice,
               type: 'sell'
             })
+            this.$store.commit('changeCash', parseFloat(this.bananaPrice.toFixed(2)))
           }
         }
       },
@@ -170,6 +198,9 @@
         },
         transactions () {
           return this.$store.state.game.transactions
+        },
+        cash () {
+          return this.$store.state.game.cash
         }
       },
       created () {}
