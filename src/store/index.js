@@ -54,38 +54,36 @@ export default new Vuex.Store({
       state.game = payload
     },
     changeApplePrice (state) {
-      let sign = (Math.random() <= 0.5) ? -1 : 1
-      let rand = Math.random() * sign
+      let sign = ((Math.random()) <= 0.5) ? -1 : 1
+      let rand = parseFloat((Math.random() * sign).toFixed(2))
+      let currentPrice = state.game.applePrice
 
-      rand = ((state.game.applePrice + rand) <= 0) ? (rand * -1) : rand
-
-      state.game.applePrice += rand
+      let out = ((currentPrice + rand) <= 0) ? (currentPrice + (rand *= -1)) : (currentPrice + rand)
+      state.game.applePrice = out
     },
     changePearPrice (state) {
       let sign = ((Math.random()) <= 0.5) ? -1 : 1
-      let rand = Math.random() * sign
-      if ((state.game.pearPrice + rand) < 0) {
-        rand *= -1
-      }
-      state.game.pearPrice += rand
+      let rand = parseFloat((Math.random() * sign).toFixed(2))
+      let currentPrice = state.game.pearPrice
+
+      let out = ((currentPrice + rand) <= 0) ? (currentPrice + (rand *= -1)) : (currentPrice + rand)
+      state.game.pearPrice = out
     },
     changeOrangePrice (state) {
       let sign = ((Math.random()) <= 0.5) ? -1 : 1
-      let rand = (Math.random() * sign)
+      let rand = parseFloat((Math.random() * sign).toFixed(2))
+      let currentPrice = state.game.orangePrice
 
-      if ((state.game.orangePrice += rand) < 0) {
-        rand *= -1
-      }
-      state.game.orangePrice += rand
+      let out = ((currentPrice + rand) <= 0) ? (currentPrice + (rand *= -1)) : (currentPrice + rand)
+      state.game.orangePrice = out
     },
     changeBananaPrice (state) {
-      let sign = (Math.random() >= 0.5) ? -1 : 1
-      let rand = Math.random() * sign
+      let sign = ((Math.random()) <= 0.5) ? -1 : 1
+      let rand = parseFloat((Math.random() * sign).toFixed(2))
+      let currentPrice = state.game.bananaPrice
 
-      if ((state.game.bananaPrice + rand) < 0) {
-        rand = rand * (sign * -1)
-      }
-      state.game.bananaPrice += rand
+      let out = ((currentPrice + rand) <= 0) ? (currentPrice + (rand *= -1)) : (currentPrice + rand)
+      state.game.bananaPrice = out
     }
   },
   actions: {
