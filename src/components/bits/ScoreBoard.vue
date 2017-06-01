@@ -4,7 +4,7 @@
             <h1>Scoreboard</h1>
             Cash: {{cash}}
             <div v-if="displayFinalStats">
-             Final Stats
+             <final-stats></final-stats>
             </div>
         </div>
         <div class="timer">
@@ -15,9 +15,11 @@
 
 <script>
     import CountdownTimer from './CountdownTimer.vue'
+    import FinalStats from './FinalStats.vue'
     export default {
       components: {
-        CountdownTimer
+        CountdownTimer,
+        FinalStats
       },
       computed: {
         cash () {
