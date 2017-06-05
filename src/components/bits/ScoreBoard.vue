@@ -2,7 +2,7 @@
     <div class="container">
         <div class="score">
             <h1>Scoreboard</h1>
-            Cash: {{cash}}
+            Cash: {{cash | toDollars}}
             <div v-if="displayFinalStats">
              <final-stats></final-stats>
             </div>
@@ -30,6 +30,12 @@
         },
         firstGame () {
           return this.$store.state.firstGame
+        }
+      },
+      filters: {
+        toDollars (str) {
+          str = str.toFixed(2)
+          return `$${str}`
         }
       }
     }

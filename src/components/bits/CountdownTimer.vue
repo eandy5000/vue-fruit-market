@@ -11,8 +11,8 @@
     export default {
       data () {
         return {
-          countStart: 3,
-          count: 3,
+          countStart: 10,
+          count: 10,
           gameTemplate () {
             return {
               apples: 0,
@@ -61,10 +61,8 @@
       },
       methods: {
         countDown () {
-          console.log('first game check ', this.firstGame)
           if (this.firstGame) {
             this.$store.commit('firstGameToggle')
-            console.log('first game ', this.firstGame)
           }
           this.$store.commit('gameOnToggle')
           const setInt = setInterval(() => {
@@ -73,7 +71,6 @@
               clearInterval(setInt)
               this.$store.commit('gameOnToggle')
               this.$store.commit('endGame', this.game)
-              console.log('games', this.games)
             }
             if (this.count !== 0) {
               this.$store.commit('changeApplePrice')
@@ -96,7 +93,6 @@
         },
         getFinalPrice () {
           let final = this.prices.length - 1
-          console.log(this.prices[final])
           return this.prices[final]
         }
       },
