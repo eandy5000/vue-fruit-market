@@ -11,8 +11,8 @@
     export default {
       data () {
         return {
-          countStart: 30,
-          count: 30,
+          countStart: 3,
+          count: 3,
           gameTemplate () {
             return {
               apples: 0,
