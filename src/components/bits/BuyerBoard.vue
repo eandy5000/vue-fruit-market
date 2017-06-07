@@ -54,7 +54,7 @@
           orange,
           pearName: 'Pear',
           appleName: 'Apple',
-          bananasName: 'Banana',
+          bananaName: 'Banana',
           orangeName: 'Orange'
         }
       },
