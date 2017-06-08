@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p><strong>Transactions:</strong> {{transactions}}</p>
+        <p><strong>Transactions:</strong> {{transactions.length}}</p>
         <div class="container">
         <ul>
             <h4>Apples</h4>
@@ -35,7 +35,7 @@
     export default {
       computed: {
         transactions () {
-          return this.$store.state.game.transactions.length
+          return this.$store.state.game.transactions
         },
         prices () {
           return this.$store.state.game.prices
@@ -85,7 +85,19 @@
           return pricer.reduce(this.minReduce)
         }
       },
-      created () {},
+      created () {
+        let buyLength = this.transactions.filter(item => item.fruit === 'Apple' && item.type === 'buy').length
+        let sellLength = this.transactions.filter(item => item.fruit === 'Apple' && item.type === 'sell').length
+        let applerBuy = this.transactions.filter(item => item.fruit === 'Apple' && item.type === 'buy')
+                                         .reduce((agg, item) => agg + item.price, 0)
+        let applerSell = this.transactions.filter(item => item.fruit === 'Apple' && item.type === 'sell')
+                                         .reduce((agg, item) => agg + item.price, 0)
+        console.log('buy', applerBuy)
+        console.log('sell', applerSell)
+        console.log('buy len', buyLength)
+        console.log('sell len', sellLength)
+        console.log('diff', applerSell - applerBuy)
+      },
       methods: {
         mapFruit (arr, fruit) {
           return arr.map(item => item[fruit])
