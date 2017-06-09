@@ -20,16 +20,43 @@
             <li>Bananas Bought: {{bananasBoughtCount}}</li>
             <li>Bananas Sold: {{bananasSold}}</li>
         </ul>
+        <ul>
+          <li><h3>Timer: {{count}}</h3></li>
+          <li>
+            <p><strong>Profit:</strong>
+            <span
+              :class="{green: profit > 0, red: profit < 0}"
+            > {{cash - 100 | toDollars}}</span></p>
+          </li>
+          <li>
+              <p><strong>Transactions:</strong> {{transactions.length}}</p>
+          </li>
+        </ul>
+        <div class="stats">
+         
+          <p><strong>Profit:</strong>
+          <span
+            :class="{green: profit > 0, red: profit < 0}"
+          > {{cash - 100 | toDollars}}</span></p>
+          <p><strong>Transactions:</strong> {{transactions.length}}</p>
+        </div>
     </div>
 </template>
 
 <script>
     import filters from '../../util/filters.js'
+    import CountdownTimer from './CountdownTimer.vue'
     export default {
       filters,
       computed: {
         prices () {
           return this.$store.state.game.prices
+        },
+        count () {
+          return this.$store.state.game.count
+        },
+        cash () {
+          return this.$store.state.game.cash
         },
         transactions () {
           return this.$store.state.game.transactions
@@ -91,9 +118,15 @@
           return this.transactions.filter(item => {
             return item.fruit === 'Banana' && item.type === 'sell'
           }).length
+        },
+        profit () {
+          return this.cash - 100
         }
       },
-      beforeUpdate () {}
+      beforeUpdate () {},
+      components: {
+        CountdownTimer
+      }
     }
 </script>
 
@@ -103,5 +136,14 @@
     }
     ul {
         list-style: none;
+    }
+    .stats {
+      display: inline-block;
+    }
+    .green {
+      color: green;
+    }
+    .red {
+      color: red;
     }
 </style>

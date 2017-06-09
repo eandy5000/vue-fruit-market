@@ -46,6 +46,16 @@
                      >{{bananasProfit | toDollars}}</span>
             </li>
         </ul>
+        <ul>
+          <h4>Cash: <span class="norm">{{cash | toDollars}}</span></h4>
+          <li>
+            <p><strong>Profit:</strong>
+            <span
+              :class="{green: profit > 0, red: profit < 0}"
+            > {{cash - 100 | toDollars}}</span></p>
+            <p><strong>Transactions:</strong> {{transactions.length}}</p>
+          </li>
+        </ul>
         </div>
     </div>
 </template>
@@ -143,6 +153,15 @@
           let sold = this.transactions.filter(item => item.fruit === 'Banana' && item.type === 'sell')
                                       .reduce((agg, item) => agg + item.price, 0)
           return sold - bought
+        },
+        cash () {
+          return this.$store.state.game.cash
+        },
+        profit () {
+          return this.cash - 100
+        },
+        count () {
+          return this.$store.state.game.count
         }
       },
       created () {},
@@ -168,10 +187,16 @@
     ul {
         list-style: none;
     }
+    .stats {
+      display: inline-block;
+    }
     .green {
       color: green;
     }
     .red {
       color: red
+    }
+    .norm {
+      font-weight: normal;
     }
 </style>

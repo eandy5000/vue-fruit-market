@@ -19,6 +19,7 @@ export default new Vuex.Store({
       bananaPrice: 5,
       transactions: [],
       prices: [],
+      count: 15,
       cash: 100
     },
     games: []
@@ -100,6 +101,12 @@ export default new Vuex.Store({
     },
     pushPrices (state, payload) {
       state.game.prices.push(payload)
+    },
+    countDown (state) {
+      state.game.count--
+    },
+    countReset (state) {
+      state.count = 30
     }
   },
   actions: {

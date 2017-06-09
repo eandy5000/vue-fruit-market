@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>{{count}}</h1>
         <button v-if="!gameOn && count < 1" @click="restart">Play Again</button>
         <button v-else-if="gameOn">Game in Progress</button>
         <button v-else v-on:click="countDown">Play</button>
@@ -12,7 +11,6 @@
       data () {
         return {
           countStart: 15,
-          count: 15,
           gameTemplate () {
             return {
               apples: 0,
@@ -25,6 +23,7 @@
               bananaPrice: 5,
               transactions: [],
               prices: [],
+              count: 15,
               cash: 100
             }
           }
@@ -57,6 +56,9 @@
         },
         firstGame () {
           return this.$store.state.firstGame
+        },
+        count () {
+          return this.$store.state.game.count
         }
       },
       methods: {
@@ -66,7 +68,7 @@
           }
           this.$store.commit('gameOnToggle')
           const setInt = setInterval(() => {
-            this.count--
+            this.$store.commit('countDown')
             if (this.count < 1) {
               clearInterval(setInt)
               this.$store.commit('gameOnToggle')
@@ -87,7 +89,7 @@
           }, 1000)
         },
         restart () {
-          this.count = this.countStart
+          this.count = this.$store.commit('countReset')
           this.$store.commit('gameReset', Object.assign({}, this.gameTemplate()))
           this.countDown()
         },
@@ -96,7 +98,9 @@
           return this.prices[final]
         }
       },
-      created () {}
+      beforeUpdate () {
+        console.log(this.count)
+      }
     }
 </script>
 
