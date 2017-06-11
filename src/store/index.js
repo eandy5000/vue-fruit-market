@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+const COUNTER_SET = 12
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     startingCash: 100,
+    countStartDefault: COUNTER_SET,
     gameOn: false,
     firstGame: true,
     game: {
@@ -19,7 +21,7 @@ export default new Vuex.Store({
       bananaPrice: 5,
       transactions: [],
       prices: [],
-      count: 15,
+      count: COUNTER_SET,
       cash: 100
     },
     games: []
@@ -106,7 +108,7 @@ export default new Vuex.Store({
       state.game.count--
     },
     countReset (state) {
-      state.count = 30
+      state.count = state.countStartDefault
     }
   },
   actions: {

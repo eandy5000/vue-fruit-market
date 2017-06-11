@@ -21,25 +21,15 @@
             <li>Bananas Sold: {{bananasSold}}</li>
         </ul>
         <ul>
-          <li><h3>Timer: {{count}}</h3></li>
+          <h4>Cash: <span class="norm">{{cash | toDollars}}</span></h4>
           <li>
             <p><strong>Profit:</strong>
             <span
               :class="{green: profit > 0, red: profit < 0}"
             > {{cash - 100 | toDollars}}</span></p>
-          </li>
-          <li>
-              <p><strong>Transactions:</strong> {{transactions.length}}</p>
+            <p><strong>Transactions:</strong> {{transactions.length}}</p>
           </li>
         </ul>
-        <div class="stats">
-         
-          <p><strong>Profit:</strong>
-          <span
-            :class="{green: profit > 0, red: profit < 0}"
-          > {{cash - 100 | toDollars}}</span></p>
-          <p><strong>Transactions:</strong> {{transactions.length}}</p>
-        </div>
     </div>
 </template>
 
@@ -137,6 +127,9 @@
     ul {
         list-style: none;
     }
+    h4 {
+      margin-top: 0;
+    }
     .stats {
       display: inline-block;
     }
@@ -145,5 +138,8 @@
     }
     .red {
       color: red;
+    }
+    .norm {
+      font-weight: normal;
     }
 </style>

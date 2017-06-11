@@ -3,6 +3,7 @@
         <button v-if="!gameOn && count < 1" @click="restart">Play Again</button>
         <button v-else-if="gameOn">Game in Progress</button>
         <button v-else v-on:click="countDown">Play</button>
+        <h1>{{count}}</h1>
     </div>
 </template>
 
@@ -10,7 +11,7 @@
     export default {
       data () {
         return {
-          countStart: 15,
+          countStart: this.countStartDefault,
           gameTemplate () {
             return {
               apples: 0,
@@ -23,7 +24,7 @@
               bananaPrice: 5,
               transactions: [],
               prices: [],
-              count: 15,
+              count: this.countStartDefault,
               cash: 100
             }
           }
@@ -59,6 +60,9 @@
         },
         count () {
           return this.$store.state.game.count
+        },
+        countStartDefault () {
+          return this.$store.state.countStartDefault
         }
       },
       methods: {
@@ -98,9 +102,7 @@
           return this.prices[final]
         }
       },
-      beforeUpdate () {
-        console.log(this.count)
-      }
+      beforeUpdate () {}
     }
 </script>
 
