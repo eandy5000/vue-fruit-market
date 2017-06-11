@@ -1,8 +1,8 @@
 <template>
     <div>
-        <button v-if="!gameOn && count < 1" @click="restart">Play Again</button>
-        <button v-else-if="gameOn">Game in Progress</button>
-        <button v-else v-on:click="countDown">Play</button>
+        <a v-if="!gameOn && count < 1" @click="restart">Play Again</a>
+        <a v-else-if="gameOn" class="holding">In Progress</a>
+        <a v-else v-on:click="countDown">Play</a>
         <h1>{{count}}</h1>
     </div>
 </template>
@@ -107,5 +107,20 @@
 </script>
 
 <style>
-    
+    a {
+        text-decoration: none;
+        border: .1em solid black;
+        border-radius: .5em;
+        padding: .3em;
+        transition: .3s all linear;
+    }
+    a:hover {
+        background-color: black;
+        color: white;
+    }
+    .holding {
+      white-space: nowrap;
+      background-color: black;
+      color: white;
+    }
 </style>
