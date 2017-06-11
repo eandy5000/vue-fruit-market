@@ -4,12 +4,13 @@
         <img :src="image" />
         <h5>Inventory: {{counter}}</h5>
         <h5>Price: {{fruitPrice | dollar}}</h5>
-        <button v-if="gameOn" @click="addFruit()">Buy</button>
-        <button v-if="gameOn" @click="subFruit()">Sell</button>
+        <game-button :logic="gameOn" text="BUY" :func="addFruit"></game-button>
+        <game-button :logic="gameOn" text="SELL" :func="subFruit"></game-button>
     </div>
 </template>
 
 <script>
+    import GameButton from './GameButton.vue'
     export default {
       props: ['name', 'image', 'counter', 'addFruit', 'subFruit', 'fruitPrice'],
       methods: {},
@@ -22,6 +23,9 @@
         gameOn () {
           return this.$store.state.gameOn
         }
+      },
+      components: {
+        GameButton
       }
     }
 </script>
