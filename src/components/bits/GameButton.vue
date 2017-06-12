@@ -8,7 +8,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     a {
         text-decoration: none;
         border: .1em solid black;
