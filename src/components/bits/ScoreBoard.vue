@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="score">
-            <h1>Scoreboard</h1>
+            <h1>Fruit Market</h1>
             <p><strong>Cash: </strong>{{cash | toDollars}}</p>
             <p v-if="difference !== 0">
             <strong>Profits: </strong>

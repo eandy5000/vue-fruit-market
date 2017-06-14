@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-const COUNTER_SET = 12
+const COUNTER_SET = 90
 
 Vue.use(Vuex)
 
